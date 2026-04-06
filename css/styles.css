@@ -55,6 +55,11 @@ table {
   background: white;
   width: 100%;
   font-size: 0.85em;
+   display: none; 
+}
+
+table.visible {
+  display: table; /* se mostrará cuando se agregue esta clase */
 }
 
 th, td {
