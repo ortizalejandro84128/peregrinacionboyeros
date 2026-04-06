@@ -143,11 +143,23 @@
 
 
  <script>
- 
- 
- 
- 
- (async () => {
+  /*  const grupos = [
+      {nombre: "alex", asientos: ["f12_a", "f12_b"] },
+      {nombre: "elo", asientos: ["f11_a", "f11_b"] },
+      {nombre: "goyo", asientos: ["f10_a", "f10_b"] },
+	  {nombre: "nombre3", asientos: ["f11_c", "f11_d"] }
+	  
+    ];
+
+    
+  asignarAsientos(grupos);
+	
+	// Contar libres y mostrar en pantalla
+  const disponibles = contarAsientosDisponibles();
+  document.body.insertAdjacentHTML("beforeend", `<p>🪑 Asientos disponibles: <strong>${disponibles}</strong></p>`);
+  */
+  
+   (async () => {
       const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1S6acQ50QEDkHeLpFGjxas-_ebMy1U_a2am50FqdT_xzVuuvZb_y7Fw-xP6dAejp4vXgY2VS_LeOh/pub?gid=0&single=true&output=csv";
       const grupos = await cargarGruposDesdeCSV(urlCSV);
       asignarAsientos(grupos);
@@ -157,10 +169,7 @@
  
 
     })();
- 
-    
- 	
- 
+
   </script>
 
 </body>
