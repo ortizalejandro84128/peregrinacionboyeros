@@ -58,15 +58,18 @@ async function cargarGruposDesdeCSV(url) {
   const response = await fetch(url);
   const text = await response.text();
 
-  // Dividir en filas y quitar la primera (encabezado)
+  // Dividir en filas y quitar encabezado
   const filas = text.trim().split("\n").slice(1);
 
   const grupos = filas.map(linea => {
-    const [nombre, asientos] = linea.split(",");
-    return {
-      nombre: nombre.trim(),
-      asientos: asientos.split(";").map(s => s.trim()) // usa ; o , según tu hoja
-    };
+    // Dividir solo en dos columnas: nombre y asientos
+    const [nombre, asientosRaw] = linea.split(/,(.+)/); // divide en la primera coma
+    // Quitar comillas y espacios
+    const limpio = asientosRaw.replace(/"/g, "").trim();
+    // Separar los asientos por coma
+    const asientos = limpio.split(",").map(s => s.trim());
+
+    return { nombre: nombre.trim(), asientos };
   });
 
   return grupos;
