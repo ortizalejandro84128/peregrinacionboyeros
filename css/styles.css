@@ -65,12 +65,28 @@ th, td {
   border: 1px solid #999;
   padding: 6px;
   text-align: center;
-  min-width: 70px; /* más compacto para celular */
+  min-width: 60px; /* ancho base para asientos */
 }
 
-.fila-label {
+/* Columna Fila */
+table th:first-child,
+table td:first-child {
+  min-width: 40px;
+  width: 40px;
+  padding: 4px;
   font-weight: bold;
   background: #eee;
+}
+
+/* Columna Pasillo */
+table th:nth-child(4),
+table td:nth-child(4) {
+  min-width: 40px;
+  width: 40px;
+  padding: 4px;
+  background: #f0f0f0;
+  font-weight: bold;
+  color: #666;
 }
 
 .asiento-vacio {
@@ -82,12 +98,6 @@ th, td {
   background: #ff6666;
   color: #fff;
   font-weight: bold;
-}
-
-.pasillo {
-  background: #f0f0f0;
-  font-weight: bold;
-  color: #666;
 }
 
 .warnings {
