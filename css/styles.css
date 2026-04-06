@@ -43,11 +43,6 @@ h2 {
   margin-bottom: 15px;
   text-align: center;
 }
-.chofer img {
-  width: 90px;
-  height: auto;
-  border-radius: 50%;
-}
 
 .contenedor-tabla {
   overflow-x: auto; /* scroll horizontal en móviles */
