@@ -1,160 +1,121 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Distribución del Autobús Acompañantes</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  <script src="../scripts/script.js"></script>
-</head>
-<body>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 15px;
+  text-align: center;
+}
 
-<div class="encabezado">
-  <img width="120" height="195"  src="../img/VSanJuan.png"  />
-    <h2 class="titulo-encabezado"> Peregrinación Ciclista <BR>Boyeros - San Juan de los Lagos  2026</h2>
-  </div>
-</div>
+h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #2c3e50;
+}
 
-  <h2>Distribución del Autobús: Acompanantes</h2>
+.encabezado {
+  display: flex;
+  flex-direction: column; /* vertical en móvil */
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
 
-  <div id="warnings" class="warnings">
-  </div>
+.encabezado img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
 
-    <div class="chofer">
-       <img style="margin-left: 120px;" width="110" height="110" src="../img/Chofer.png" /> 
-    </div>
+.titulo-encabezado {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
 
-<table>
-  <thead>
-    <tr>
-      <th>Fila</th><th>A</th><th>B</th><th>Pasillo</th><th>C</th><th>D</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Fila 1 -->
-    <tr>
-      <td class="fila-label">F-1</td>
-      <td id="f1_a" class="asiento-vacio">----------</td>
-      <td id="f1_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f1_c" class="asiento-vacio">----------</td>
-      <td id="f1_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 2 -->
-    <tr>
-      <td class="fila-label">F-2</td>
-      <td id="f2_a" class="asiento-vacio">----------</td>
-      <td id="f2_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f2_c" class="asiento-vacio">----------</td>
-      <td id="f2_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 3 -->
-    <tr>
-      <td class="fila-label">F-3</td>
-      <td id="f3_a" class="asiento-vacio">----------</td>
-      <td id="f3_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f3_c" class="asiento-vacio">----------</td>
-      <td id="f3_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 4 -->
-    <tr>
-      <td class="fila-label">F-4</td>
-      <td id="f4_a" class="asiento-vacio">----------</td>
-      <td id="f4_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f4_c" class="asiento-vacio">----------</td>
-      <td id="f4_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 5 -->
-    <tr>
-      <td class="fila-label">F-5</td>
-      <td id="f5_a" class="asiento-vacio">----------</td>
-      <td id="f5_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f5_c" class="asiento-vacio">----------</td>
-      <td id="f5_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 6 -->
-    <tr>
-      <td class="fila-label">F-6</td>
-      <td id="f6_a" class="asiento-vacio">----------</td>
-      <td id="f6_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f6_c" class="asiento-vacio">----------</td>
-      <td id="f6_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 7 -->
-    <tr>
-      <td class="fila-label">F-7</td>
-      <td id="f7_a" class="asiento-vacio">----------</td>
-      <td id="f7_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f7_c" class="asiento-vacio">----------</td>
-      <td id="f7_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 8 -->
-    <tr>
-      <td class="fila-label">F-8</td>
-      <td id="f8_a" class="asiento-vacio">----------</td>
-      <td id="f8_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f8_c" class="asiento-vacio">----------</td>
-      <td id="f8_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 9 -->
-    <tr>
-      <td class="fila-label">F-9</td>
-      <td id="f9_a" class="asiento-vacio">----------</td>
-      <td id="f9_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f9_c" class="asiento-vacio">----------</td>
-      <td id="f9_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 10 -->
-    <tr>
-      <td class="fila-label">F-10</td>
-      <td id="f10_a" class="asiento-vacio">----------</td>
-      <td id="f10_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f10_c" class="asiento-vacio">----------</td>
-      <td id="f10_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 11 -->
-    <tr>
-      <td class="fila-label">F-11</td>
-      <td id="f11_a" class="asiento-vacio">----------</td>
-      <td id="f11_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f11_c" class="asiento-vacio">----------</td>
-      <td id="f11_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 12 -->
-    <tr>
-      <td class="fila-label">F-12</td>
-      <td id="f12_a" class="asiento-vacio">----------</td>
-      <td id="f12_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td class="pasillo">----------</td>
-      <td class="pasillo">----------</td>
-    </tr>
-  </tbody>
-</table>
+.chofer {
+  float: left;          /* flota hacia la izquierda */
+  margin-left: 50px;    /* margen de 50px a la izquierda */
+  margin-bottom: 15px;
+  text-align: center;
+}
+.chofer img {
+  width: 90px;
+  height: auto;
+  border-radius: 50%;
+}
 
+.contenedor-tabla {
+  overflow-x: auto; /* scroll horizontal en móviles */
+  margin: 0 auto;
+  max-width: 100%;
+}
 
- <script>
-(async () => {
-      const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUFsOYlB0yCu9vjjW6lFhXtH8K-pUnSBQwuXMnpLYPYw9ejLn42yj-d_09G7BQTcTRR_KiElYFCwC4/pub?gid=0&single=true&output=csv";
-      const grupos = await cargarGruposDesdeCSV(urlCSV);
-      asignarAsientos(grupos);
-	// Contar libres y mostrar en pantalla
-  const disponibles = contarAsientosDisponibles();
-  document.body.insertAdjacentHTML("beforeend", `<p>🪑 Asientos disponibles: <strong>${disponibles}</strong></p>`);
- 
+table {
+  border-collapse: collapse;
+  background: white;
+  width: 100%;
+  font-size: 0.85em;
+}
 
-    })();
-   
-  </script>
+th, td {
+  border: 1px solid #999;
+  padding: 6px;
+  text-align: center;
+  min-width: 60px; /* ancho base para asientos */
+}
 
-</body>
-</html>
+/* Columna Fila */
+table th:first-child,
+table td:first-child {
+  min-width: 40px;
+  width: 40px;
+  padding: 4px;
+  font-weight: bold;
+  background: #eee;
+}
+
+/* Columna Pasillo */
+table th:nth-child(4),
+table td:nth-child(4) {
+  min-width: 40px;
+  width: 40px;
+  padding: 4px;
+  background: #f0f0f0;
+  font-weight: bold;
+  color: #666;
+}
+
+.asiento-vacio {
+  background: #e0ffe0;
+  color: #555;
+}
+
+.ocupado {
+  background: #ff6666;
+  color: #fff;
+  font-weight: bold;
+}
+
+.warnings {
+  color: #b30000;
+  font-weight: bold;
+  margin: 15px auto;
+  max-width: 90%;
+  font-size: 0.9em;
+}
+
+#libres {
+  margin-top: 15px;
+  font-size: 1em;
+}
+
+@media print {
+  #libres {
+    display: none;
+  }
+}
