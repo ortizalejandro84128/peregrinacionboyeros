@@ -2,159 +2,239 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Distribución del Autobús Acompañantes</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <script src="../scripts/script.js"></script>
+  
+  <style>
+    /* TODO EL DISEÑO AUTOCONTENIDO (No depende de archivos CSS externos) */
+    :root {
+      --bg-azul-intenso: #1e40af; /* Fondo azul rey intenso solicitado */
+      --dorado-premium: #d4af37; /* Detalles y bordes dorados */
+      --azul-ocupado-bg: #e0f2fe; /* Bloque de asiento ocupado */
+      --azul-ocupado-texto: #0369a1; /* Letra del asiento ocupado */
+      --azul-marino: #1e3a5f; /* Texto principal de etiquetas */
+    }
+
+    body {
+      background-color: var(--bg-azul-intenso);
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    
+    /* Contenedor del Autobús Blanco + Marco Dorado */
+    .bus-frame {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border: 3px solid var(--dorado-premium);
+    }
+
+    /* ESTILO PARA EL ASIENTO CUANDO ESTÁ VACÍO (Mantiene tu clase original) */
+    .asiento-vacio {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px; /* Redondeado impecable */
+      padding: 10px 4px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #94a3b8;
+      text-align: center;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.02);
+      word-break: break-word;
+      transition: all 0.2s ease;
+    }
+
+    /* ESTILO PARA EL ASIENTO CUANDO TU JS LE APLICA LA CLASE "ocupado" 
+       ¡Conserva exactamente el mismo borde y redondeado pero cambia a los tonos azules! */
+    .ocupado {
+      background: linear-gradient(180deg, var(--azul-ocupado-bg) 0%, #cbdffd 100%);
+      border: 1px solid #bae6fd; /* Borde fino azul claro */
+      border-radius: 8px; /* Mantiene el redondeado */
+      padding: 10px 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--azul-ocupado-texto);
+      text-align: center;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 -3px 0 rgba(3, 105, 161, 0.08);
+      word-break: break-word;
+    }
+
+    /* Decoraciones Doradas */
+    .border-dorado {
+      border: 2px solid var(--dorado-premium) !important;
+    }
+
+    .bg-dorado {
+      background-color: var(--dorado-premium) !important;
+      color: #ffffff !important;
+    }
+
+    .pasillo-virtual {
+      width: 40px;
+    }
+
+    .col-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #788fa6;
+      font-weight: 700;
+    }
+
+    .fila-numero {
+      font-size: 0.85rem;
+      color: var(--azul-marino);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .fade-in-bus {
+      animation: fadeInUp 0.5s ease-out;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
 
-<div class="encabezado">
-  <img width="120" height="195"  src="../img/VSanJuan.png"  />
-    <h2 class="titulo-encabezado"> Peregrinación Ciclista <BR>Boyeros - San Juan de los Lagos  2026</h2>
-  </div>
-</div>
-
-  <h2>Distribución del Autobús: Acompanantes</h2>
-
-  <div id="warnings" class="warnings">
-  </div>
-
-    <div class="chofer">
-       <img style="margin-left: 120px;" width="110" height="110" src="../img/Chofer.png" /> 
+  <div class="container my-5 fade-in-bus">
+    
+    <div class="text-center mb-5">
+      <img class="mb-3 border-dorado p-1 bg-white rounded-circle shadow-sm" width="90" height="90" src="../img/VSanJuan.png" alt="Virgen de San Juan" style="object-fit: contain;" />
+      <h1 class="fw-bold tracking-tight m-0 text-white" style="font-weight: 800; font-size: 2.2rem;">Peregrinación Ciclista</h1>
+      <p class="text-white-50 fs-5 mb-2">Boyeros - San Juan de los Lagos 2026</p>
+      <span class="badge bg-dorado rounded-pill px-4 py-2 fs-6 shadow-sm">Autobús Acompañantes</span>
     </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Fila</th><th>A</th><th>B</th><th>Pasillo</th><th>C</th><th>D</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Fila 1 -->
-    <tr>
-      <td class="fila-label">F-1</td>
-      <td id="f1_a" class="asiento-vacio">----------</td>
-      <td id="f1_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f1_c" class="asiento-vacio">----------</td>
-      <td id="f1_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 2 -->
-    <tr>
-      <td class="fila-label">F-2</td>
-      <td id="f2_a" class="asiento-vacio">----------</td>
-      <td id="f2_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f2_c" class="asiento-vacio">----------</td>
-      <td id="f2_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 3 -->
-    <tr>
-      <td class="fila-label">F-3</td>
-      <td id="f3_a" class="asiento-vacio">----------</td>
-      <td id="f3_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f3_c" class="asiento-vacio">----------</td>
-      <td id="f3_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 4 -->
-    <tr>
-      <td class="fila-label">F-4</td>
-      <td id="f4_a" class="asiento-vacio">----------</td>
-      <td id="f4_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f4_c" class="asiento-vacio">----------</td>
-      <td id="f4_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 5 -->
-    <tr>
-      <td class="fila-label">F-5</td>
-      <td id="f5_a" class="asiento-vacio">----------</td>
-      <td id="f5_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f5_c" class="asiento-vacio">----------</td>
-      <td id="f5_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 6 -->
-    <tr>
-      <td class="fila-label">F-6</td>
-      <td id="f6_a" class="asiento-vacio">----------</td>
-      <td id="f6_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f6_c" class="asiento-vacio">----------</td>
-      <td id="f6_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 7 -->
-    <tr>
-      <td class="fila-label">F-7</td>
-      <td id="f7_a" class="asiento-vacio">----------</td>
-      <td id="f7_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f7_c" class="asiento-vacio">----------</td>
-      <td id="f7_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 8 -->
-    <tr>
-      <td class="fila-label">F-8</td>
-      <td id="f8_a" class="asiento-vacio">----------</td>
-      <td id="f8_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f8_c" class="asiento-vacio">----------</td>
-      <td id="f8_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 9 -->
-    <tr>
-      <td class="fila-label">F-9</td>
-      <td id="f9_a" class="asiento-vacio">----------</td>
-      <td id="f9_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f9_c" class="asiento-vacio">----------</td>
-      <td id="f9_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 10 -->
-    <tr>
-      <td class="fila-label">F-10</td>
-      <td id="f10_a" class="asiento-vacio">----------</td>
-      <td id="f10_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f10_c" class="asiento-vacio">----------</td>
-      <td id="f10_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 11 -->
-    <tr>
-      <td class="fila-label">F-11</td>
-      <td id="f11_a" class="asiento-vacio">----------</td>
-      <td id="f11_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td id="f11_c" class="asiento-vacio">----------</td>
-      <td id="f11_d" class="asiento-vacio">----------</td>
-    </tr>
-    <!-- Fila 12 -->
-    <tr>
-      <td class="fila-label">F-12</td>
-      <td id="f12_a" class="asiento-vacio">----------</td>
-      <td id="f12_b" class="asiento-vacio">----------</td>
-      <td class="pasillo">---</td>
-      <td class="pasillo">----------</td>
-      <td class="pasillo">----------</td>
-    </tr>
-  </tbody>
-</table>
+    <div id="warnings" class="warnings mb-2"></div>
+    <div id="errores" class="mb-4 text-center fw-bold text-white bg-danger rounded-3 p-2 d-none"></div>
 
+    <div class="bus-frame p-4 p-md-5 mb-4">
+      
+      <div class="row align-items-center mb-5 border-bottom pb-4 px-2">
+        <div class="col-6">
+          <div class="d-flex align-items-center">
+            <div class="position-relative">
+              <img class="rounded-circle border-dorado p-1 bg-white shadow-sm" width="60" height="60" src="../img/Chofer.png" alt="Chofer" />
+              <span class="position-absolute bottom-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle"></span>
+            </div>
+            <div class="ms-3">
+              <p class="m-0 fw-bold lh-1" style="color: var(--azul-marino);">Personal</p>
+              <small class="text-muted">Chofer del Autobús</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 text-end">
+          <span class="text-uppercase text-muted small fw-bold tracking-wider">Puerta Autobús ➔</span>
+        </div>
+      </div>
 
- <script>
-(async () => {
+      <div class="row g-2 text-center mb-3 align-items-center px-1">
+        <div class="col-2 col-label">Fila</div>
+        <div class="col-2 col-label">A</div>
+        <div class="col-2 col-label">B</div>
+        <div class="pasillo-virtual"></div>
+        <div class="col-2 col-label">C</div>
+        <div class="col-2 col-label">D</div>
+      </div>
+
+      <div class="d-flex flex-column gap-3">
+        <script>
+          const totalFilas = 12;
+          for (let i = 1; i <= totalFilas; i++) {
+            const esUltimaFila = (i === 12);
+            
+            document.write(`
+              <div class="row g-2 align-items-center text-center px-1">
+                <div class="col-2 fila-numero">F-${i}</div>
+                
+                <div class="col-2">
+                  <div id="f${i}_a" class="asiento-vacio">----------</div>
+                </div>
+                <div class="col-2">
+                  <div id="f${i}_b" class="asiento-vacio">----------</div>
+                </div>
+                
+                <div class="pasillo-virtual"></div>
+                
+                ${esUltimaFila ? `
+                  <div class="col-2"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
+                  <div class="col-2"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
+                ` : `
+                  <div class="col-2">
+                    <div id="f${i}_c" class="asiento-vacio">----------</div>
+                  </div>
+                  <div class="col-2">
+                    <div id="f${i}_d" class="asiento-vacio">----------</div>
+                  </div>
+                `}
+              </div>
+            `);
+          }
+        </script>
+      </div>
+
+      <div id="disponibles-container" class="mt-5 pt-4 border-top text-center"></div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    (async () => {
       const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUFsOYlB0yCu9vjjW6lFhXtH8K-pUnSBQwuXMnpLYPYw9ejLn42yj-d_09G7BQTcTRR_KiElYFCwC4/pub?gid=0&single=true&output=csv";
-      const grupos = await cargarGruposDesdeCSV(urlCSV);
-      asignarAsientos(grupos);
-	// Contar libres y mostrar en pantalla
-  const disponibles = contarAsientosDisponibles();
-  document.body.insertAdjacentHTML("beforeend", `<p>🪑 Asientos disponibles: <strong>${disponibles}</strong></p>`);
- 
-document.querySelector("table").classList.add("visible");
+      
+      try {
+        // 1. Llama a tu función original para descargar el CSV
+        const grupos = await cargarGruposDesdeCSV(urlCSV);
+        
+        // 2. Llama a tu función original para poblar los nombres. 
+        // Esta función automáticamente quitará ".asiento-vacio" y añadirá ".ocupado"
+        asignarAsientos(grupos);
+        
+        // 3. Llama a tu función original para contar los restantes que se quedaron con ".asiento-vacio"
+        const disponibles = contarAsientosDisponibles();
+        
+        // 4. Muestra el resultado de asientos disponibles de forma estilizada
+        const txtDisponibles = `
+          <div class="d-inline-flex align-items-center bg-light px-4 py-2 rounded-pill border border-warning-subtle shadow-sm">
+            <span class="fs-6 text-secondary me-2">🪑 Asientos disponibles:</span>
+            <span class="badge bg-dorado fs-6 px-3 py-1.5 rounded-pill">${disponibles}</span>
+          </div>
+        `;
+        document.getElementById("disponibles-container").innerHTML = txtDisponibles;
+
+        // Mostrar el contenedor de errores si tu JS inyectó contenido en él
+        const divErr = document.getElementById("errores");
+        if(divErr && divErr.innerHTML !== "") {
+          divErr.classList.remove("d-none");
+        }
+
+      } catch (error) {
+        console.error("Error en la ejecución del flujo de datos del autobús:", error);
+      }
     })();
-   
   </script>
 
 </body>
 </html>
+
