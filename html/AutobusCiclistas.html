@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Distribución del Autobús Acompañantes</title>
+  <title>Distribución del Autobús Ciclistas</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   
@@ -111,6 +111,28 @@
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Optimizaciones para pantallas pequeñas (Vertical) */
+    @media (max-width: 576px) {
+      .container {
+        padding-left: 4px;
+        padding-right: 4px;
+        margin-top: 1.5rem !important; /* Reduce espacio superior en móvil */
+      }
+      .bus-frame {
+        padding: 1.25rem 0px !important; /* Eliminamos margen lateral por completo */
+        border-radius: 16px;
+      }
+      .asiento-vacio, .ocupado {
+        font-size: 0.68rem; /* Fuente ligeramente menor para nombres largos */
+        min-height: 48px;
+        padding: 6px 2px;
+      }
+      .pasillo-virtual {
+        width: 12px; /* Pasillo mucho más estrecho en móvil */
+      }
+      h1 { font-size: 1.7rem !important; }
+    }
   </style>
 </head>
 <body>
@@ -127,7 +149,7 @@
     <div id="warnings" class="warnings mb-2"></div>
     <div id="errores" class="mb-4 text-center fw-bold text-white bg-danger rounded-3 p-2 d-none"></div>
 
-    <div class="bus-frame p-4 p-md-5 mb-4">
+    <div class="bus-frame p-4 p-md-5 mb-4 overflow-hidden">
       
       <div class="row align-items-center mb-5 border-bottom pb-4 px-2">
         <div class="col-6">
@@ -147,13 +169,13 @@
         </div>
       </div>
 
-      <div class="row g-2 text-center mb-3 align-items-center px-1">
-        <div class="col-2 col-label">Fila</div>
-        <div class="col-2 col-label">A</div>
-        <div class="col-2 col-label">B</div>
+      <div class="row gx-1 gy-2 text-center mb-3 align-items-center px-0">
+        <div class="col-auto col-label" style="width: 45px;">Fila</div>
+        <div class="col col-label">A</div>
+        <div class="col col-label">B</div>
         <div class="pasillo-virtual"></div>
-        <div class="col-2 col-label">C</div>
-        <div class="col-2 col-label">D</div>
+        <div class="col col-label">C</div>
+        <div class="col col-label">D</div>
       </div>
 
       <div class="d-flex flex-column gap-3">
@@ -163,26 +185,26 @@
             const esUltimaFila = (i === 12);
             
             document.write(`
-              <div class="row g-2 align-items-center text-center px-1">
-                <div class="col-2 fila-numero">F-${i}</div>
+              <div class="row gx-1 gy-2 align-items-center text-center px-0">
+                <div class="col-auto fila-numero" style="width: 45px;">F-${i}</div>
                 
-                <div class="col-2">
+                <div class="col">
                   <div id="f${i}_a" class="asiento-vacio">----------</div>
                 </div>
-                <div class="col-2">
+                <div class="col">
                   <div id="f${i}_b" class="asiento-vacio">----------</div>
                 </div>
                 
                 <div class="pasillo-virtual"></div>
                 
                 ${esUltimaFila ? `
-                  <div class="col-2"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
-                  <div class="col-2"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
+                  <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
+                  <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
                 ` : `
-                  <div class="col-2">
+                  <div class="col">
                     <div id="f${i}_c" class="asiento-vacio">----------</div>
                   </div>
-                  <div class="col-2">
+                  <div class="col">
                     <div id="f${i}_d" class="asiento-vacio">----------</div>
                   </div>
                 `}
