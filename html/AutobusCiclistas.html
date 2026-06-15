@@ -179,39 +179,45 @@
       </div>
 
       <div class="d-flex flex-column gap-3">
-        <script>
-          const totalFilas = 12;
-          for (let i = 1; i <= totalFilas; i++) {
-            const esUltimaFila = (i === 12);
-            
-            document.write(`
-              <div class="row gx-1 gy-2 align-items-center text-center px-0">
-                <div class="col-auto fila-numero" style="width: 45px;">F-${i}</div>
-                
-                <div class="col">
-                  <div id="f${i}_a" class="asiento-vacio">----------</div>
-                </div>
-                <div class="col">
-                  <div id="f${i}_b" class="asiento-vacio">----------</div>
-                </div>
-                
-                <div class="pasillo-virtual"></div>
-                
-                ${esUltimaFila ? `
-                  <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
-                  <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display: flex; align-items: center; justify-content: center;">----------</div></div>
-                ` : `
-                  <div class="col">
-                    <div id="f${i}_c" class="asiento-vacio">----------</div>
-                  </div>
-                  <div class="col">
-                    <div id="f${i}_d" class="asiento-vacio">----------</div>
-                  </div>
-                `}
-              </div>
-            `);
-          }
-        </script>
+
+      <script>
+  const totalFilas = 12;
+  for (let i = 1; i <= totalFilas; i++) {
+    const esPrimeraFila = (i === 1);
+    const esUltimaFila = (i === 12);
+    
+    document.write(`
+      <div class="row gx-1 gy-2 align-items-center text-center px-0">
+        <div class="col-auto fila-numero" style="width: 45px;">F-${i}</div>
+        
+        <div class="col">
+          <div id="f${i}_a" class="asiento-vacio">----------</div>
+        </div>
+        <div class="col">
+          <div id="f${i}_b" class="asiento-vacio">----------</div>
+        </div>
+        
+        <div class="pasillo-virtual"></div>
+        
+        ${esPrimeraFila ? `
+          <!-- Fila 1: C y D deshabilitados -->
+          <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display:flex; align-items:center; justify-content:center;">----------</div></div>
+          <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display:flex; align-items:center; justify-content:center;">----------</div></div>
+        ` : esUltimaFila ? `
+          <!-- Fila 12: habilitado C, deshabilitado D -->
+          <div class="col"><div id="f${i}_c" class="asiento-vacio">----------</div></div>
+          <div class="col"><div class="border-0 bg-transparent text-muted opacity-25" style="font-size: 0.78rem; min-height: 52px; display:flex; align-items:center; justify-content:center;">----------</div></div>
+        ` : `
+          <!-- Filas intermedias: C y D habilitados -->
+          <div class="col"><div id="f${i}_c" class="asiento-vacio">----------</div></div>
+          <div class="col"><div id="f${i}_d" class="asiento-vacio">----------</div></div>
+        `}
+      </div>
+    `);
+  }
+</script>
+
+      
       </div>
 
       <div id="disponibles-container" class="mt-5 pt-4 border-top text-center"></div>
