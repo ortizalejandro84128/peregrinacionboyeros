@@ -134,34 +134,35 @@
       h1 { font-size: 1.7rem !important; }
     }
 
-    @media print {
-  body {
-    background: #fff !important;
-    color: #000 !important;
-  }
-
-  /* Ocultar todo lo que no sea título y autobús */
+@media print {
+  /* Ocultar todo excepto título y autobús */
   body * {
-    visibility: hidden;
+    display: none !important;
   }
 
   h1, .bus-frame {
-    visibility: visible;
+    display: block !important;
   }
 
-  /* Asegurar que se impriman en la posición correcta */
-  h1 {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-
+  /* Ajustes para que no se corte */
   .bus-frame {
-    position: relative;
-    page-break-inside: avoid; /* evita que se corte en dos hojas */
+    page-break-inside: avoid;
     break-inside: avoid;
-    max-width: 100%; /* quepa en la hoja */
+    max-width: 100% !important;
     box-shadow: none !important;
     border: 1px solid #000 !important;
+  }
+
+  /* Opcional: centrar título arriba */
+  h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #000 !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
   }
 }
 
