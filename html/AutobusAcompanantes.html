@@ -133,6 +133,38 @@
       }
       h1 { font-size: 1.7rem !important; }
     }
+
+    @media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Ocultar todo lo que no sea título y autobús */
+  body * {
+    visibility: hidden;
+  }
+
+  h1, .bus-frame {
+    visibility: visible;
+  }
+
+  /* Asegurar que se impriman en la posición correcta */
+  h1 {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .bus-frame {
+    position: relative;
+    page-break-inside: avoid; /* evita que se corte en dos hojas */
+    break-inside: avoid;
+    max-width: 100%; /* quepa en la hoja */
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+}
+
   </style>
 </head>
 <body>
